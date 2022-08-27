@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 Route::middleware(['auth'])->group(function(){
     Route::resource('notes', notesController::class);
+    Route::get('/data/notes',[notesController::class,'getData'])->name('notes.data');
 });
 //Route::get('/notes/{note}', [notesController::class,'show']);
 //Route::resource('notes', notesController::class);

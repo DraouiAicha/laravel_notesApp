@@ -35,6 +35,18 @@
                             </div>
                             {{-- <textarea id="description" type="text" class="form-control" name="description" required readonly>{{ $note->description }}</textarea> --}}
                         </div>
+                        <div class="row mb-3">
+                            <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Share With Others') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="share[]" id="share" multiple>
+                                    @foreach (App\Models\User::all()->except(Auth::id()) as $user)
+                                        <option value="{{$user->id}}" {{$isEdit ? ($note->shared->contains($user) ? 'selected' : '') : ''}}>{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- <textarea id="description" type="text" class="form-control" name="description" required readonly>{{ $note->description }}</textarea> --}}
+                        </div>
                         <button type="submit">{{$isEdit ?"Update":"Create"}}</button>
                     </form>
                 </div>

@@ -9,6 +9,9 @@
 
                 <div class="card-body">
                         <div class="row mb-3">
+                            <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Created by: '.$note->user->name) }}</label>
+                        </div>
+                        <div class="row mb-3">
                             <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
@@ -22,6 +25,14 @@
                                 <input id="description" type="text" class="form-control" name="description" value="{{ $note->description }}" required readonly>
                             </div>
                             {{-- <textarea id="description" type="text" class="form-control" name="description" required readonly>{{ $note->description }}</textarea> --}}
+                        </div>
+                        <div class="row mb-3">
+                            <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Share With') }}</label>
+                            <ul>
+                            @foreach ($note->shared as $u)
+                                <li>{{$u->name}}</li>
+                            @endforeach
+                            </ul>
                         </div>
                         <a href="{{route('notes.edit',$note->id)}}">Edit</a>
                         <form method="POST" action="{{route('notes.destroy',$note->id)}}">
